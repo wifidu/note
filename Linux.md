@@ -6,6 +6,7 @@
 * [Useful commands](#useful-commands)
   * [wc](#wc)
   * [ps](#ps)
+  * [top](#top)
 
 <!-- vim-markdown-toc -->
 ## 查询系统负载信息
@@ -60,4 +61,98 @@ root   31302 2095 0 17:42 ?    00:00:00 sshd: root@pts/2
 root   31374 31302 0 17:42 pts/2  00:00:00 -bash
 root   31400   1 0 17:46 ?    00:00:00 /usr/bin/python /usr/sbin/aptd
 root   31407 31374 0 17:48 pts/2  00:00:00 ps -ef
+```
+
+### [top](https://www.runoob.com/w3cnote/linux-common-command-2.html)
+
+**语法**
+```
+-c 显示完整的进程命令
+-s 保密模式
+-p <进程号> 指定进程显示
+-n <次数>循环显示次数
+```
+
+**e.g.**
+```shell
+top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 1.25, 1.32, 1.35
+Tasks: 206 total,   1 running, 205 sleeping,   0 stopped,   0 zombie
+Cpu(s):  5.9%us,  3.4%sy,  0.0%ni, 90.4%id,  0.0%wa,  0.0%hi,  0.2%si,  0.0%st
+Mem:  32949016k total, 14411180k used, 18537836k free,   169884k buffers
+Swap: 32764556k total,        0k used, 32764556k free,  3612636k cached
+PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND  
+28894 root      22   0 1501m 405m  10m S 52.2  1.3   2534:16 java  
+```
+
+前五行是当前系统情况整体的统计信息区。
+
+- 第一行，任务队列信息，同 uptime 命令的执行结果，具体参数说明情况如下：
+
+  14:06:23 — 当前系统时间
+
+  up 70 days, 16:44 — 系统已经运行了70天16小时44分钟（在这期间系统没有重启过的吆！）
+
+  2 users — 当前有2个用户登录系统
+
+  load average: 1.15, 1.42, 1.44 — load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。
+
+  load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了。
+  
+  [**load average**](https://blog.csdn.net/ztf312/article/details/80342234)
+
+- 第二行，Tasks — 任务（进程），具体信息说明如下：
+
+  系统现在共有206个进程，其中处于运行中的有1个，205个在休眠（sleep），stoped状态的有0个，zombie状态（僵尸）的有0个。
+
+- 第三行，cpu状态信息，具体属性说明如下：
+
+```
+5.9%us — 用户空间占用CPU的百分比。
+3.4% sy — 内核空间占用CPU的百分比。
+0.0% ni — 改变过优先级的进程占用CPU的百分比
+90.4% id — 空闲CPU百分比
+0.0% wa — IO等待占用CPU的百分比
+0.0% hi — 硬中断（Hardware IRQ）占用CPU的百分比
+0.2% si — 软中断（Software Interrupts）占用CPU的百分比
+```
+
+备注：在这里CPU的使用比率和windows概念不同，需要理解linux系统用户空间和内核空间的相关知识！
+
+第四行，内存状态，具体信息如下：
+
+```
+32949016k total — 物理内存总量（32GB）
+14411180k used — 使用中的内存总量（14GB）
+18537836k free — 空闲内存总量（18GB）
+169884k buffers — 缓存的内存量 （169M）
+```
+
+第六行，空行。
+
+第七行以下：各进程（任务）的状态监控，项目列信息说明如下：
+
+```
+PID — 进程id
+USER — 进程所有者
+PR — 进程优先级
+NI — nice值。负值表示高优先级，正值表示低优先级
+VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+SHR — 共享内存大小，单位kb
+S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+%CPU — 上次更新到现在的CPU时间占用百分比
+%MEM — 进程使用的物理内存百分比
+TIME+ — 进程使用的CPU时间总计，单位1/100秒
+COMMAND — 进程名称（命令名/命令行）
+top 交互命令
+```
+
+```
+h 显示top交互命令帮助信息
+c 切换显示命令名称和完整命令行
+m 以内存使用率排序
+P 根据CPU使用百分比大小进行排序
+T 根据时间/累计时间进行排序
+W 将当前设置写入~/.toprc文件中
+o或者O 改变显示项目的顺序
 ```
