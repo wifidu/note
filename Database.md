@@ -11,6 +11,7 @@
     * [RDB持久化](#rdb持久化)
     * [AOF持久化](#aof持久化)
     * [优缺点](#优缺点)
+* [Mysql](#mysql)
 
 <!-- vim-markdown-toc -->
 
@@ -182,3 +183,11 @@ dir /etc/redis
 - 数据文件体积较大,即使有重写机制，但是在相同的数据集情况下，AOF文件通常比RDB文件大。
 - 相对RDB方式，AOF速度慢于RDB，并且在数据量大时候，恢复速度AOF速度也是慢于RDB。
 - 由于频繁地将命令同步到文件中，AOF持久化对性能的影响相对RDB较大，但是对于我们来说是可以接受的。
+
+## Mysql
+
+`mysql_secure_installation`
+
+```shell
+pacman -S php-fpm libapache2-mod-php php-mysql
+```
