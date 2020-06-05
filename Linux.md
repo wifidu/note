@@ -13,6 +13,8 @@
 
 > manjaro linux : `pacman -S net-tools`
 
+`uptime` load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。
+
 [Linux查看某个端口的连接数](https://www.cnblogs.com/EasonJim/p/8098532.html)
 
 [netstat]( https://www.cnblogs.com/ftl1012/p/netstat.html )
