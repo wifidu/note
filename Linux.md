@@ -2,6 +2,9 @@
 
 <!-- vim-markdown-toc Redcarpet -->
 
+* [Shell](#shell)
+  * [脚本](#脚本)
+  * [Shell　输入/输出重定向](#shell　输入-输出重定向)
 * [查询系统负载信息](#查询系统负载信息)
 * [Useful commands](#useful-commands)
   * [wc](#wc)
@@ -9,6 +12,117 @@
   * [top](#top)
 
 <!-- vim-markdown-toc -->
+## Shell
+
+### 脚本
+
+```shell
+echo -e "OK! \n" # -e 开启转义
+```
+
+```shell
+echo "数组元素个数为: ${#my_array[*]}"
+echo "数组元素个数为: ${#my_array[@]}"
+```
+
+- 拼接字符串
+
+```shell
+your_name="runoob"
+# 使用双引号拼接
+greeting="hello, "$your_name" !"
+greeting_1="hello, ${your_name} !"
+echo $greeting  $greeting_1
+# 使用单引号拼接
+greeting_2='hello, '$your_name' !'
+greeting_3='hello, ${your_name} !'
+echo $greeting_2  $greeting_3
+```
+输出结果为：
+
+```shell
+hello, runoob ! hello, runoob !
+hello, runoob ! hello, ${your_name} !
+```
+- 获取字符串长度
+
+```shell
+string="abcd"
+echo ${#string} #输出 4
+```
+- 提取子字符串
+
+```shell
+以下实例从字符串第 2 个字符开始截取 4 个字符：
+
+string="runoob is a great site"
+echo ${string:1:4} # 输出 unoo
+注意：第一个字符的索引值为 0。
+```
+
+- 查找子字符串
+
+```shell
+查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)：
+
+string="runoob is a great site"
+echo `expr index "$string" io`  # 输出 4
+```
+ | 参数处理 | 说明                                                                                                                                                                                    |
+ |----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+ | $#       | 传递到脚本的参数个数                                                                                                                                                                    |
+ | `$0`     | 当前脚本的文件名                                                                                                                                                                        |
+ | `$n`     | 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。                                                                                            |
+ | $*       | 以一个单字符串显示所有向脚本传递的参数。                                                                                 如"$*"用「"」括起来的情况、以"$1  $2 … $n"的形式输出所有参数。 |
+ | $$       | 脚本运行的当前进程ID号                                                                                                                                                                  |
+ | $!       | 后台运行的最后一个进程的ID号                                                                                                                                                            |
+ | $@       | 与$*相同，但是使用时加引号，并在引号中返回每个参数。如"$@"用「"」括起来的情况、以"$1" "$2" … "$n" 的形式输出所有参数。                                                                  |
+ | $-       | 显示Shell使用的当前选项，与set命令功能相同。                                                                                                                                            |
+ | $?       | 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。或返回值。                                                                                                                 |
+
+### [Shell　输入/输出重定向](https://www.runoob.com/linux/linux-shell-io-redirections.html)
+
+| 命令            | 说明                                               |
+|-----------------|----------------------------------------------------|
+| command > file  | 将输出重定向到 file。                              |
+| command < file  | 将输入重定向到 file。                              |
+| command >> file | 将输出以追加的方式重定向到 file。                  |
+| n > file        | 将文件描述符为 n 的文件重定向到 file。             |
+| n >> file       | 将文件描述符为 n 的文件以追加的方式重定向到 file。 |
+| n >& m          | 将输出文件 m 和 n 合并。                           |
+| n <& m          | 将输入文件 m 和 n 合并。                           |
+| << tag          | 将开始标记 tag 和结束标记 tag 之间的内容作为输入。 |
+
+一般情况下，每个 Unix/Linux 命令运行时都会打开三个文件：
+
+- 标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。
+- 标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。
+- 标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。
+
+如果希望将 stdout 和 stderr 合并后重定向到 file，可以这样写：
+
+```shell
+$ command > file 2>&1
+
+或者
+
+$ command >> file 2>&1
+```
+
+如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 `/dev/null`：
+
+> /dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到"禁止输出"的效果。
+
+```shell
+$ command > /dev/null
+```
+
+如果希望屏蔽 stdout 和 stderr，可以这样写：
+
+```shell
+$ command > /dev/null 2>&1
+```
+
 ## 查询系统负载信息
 
 > manjaro linux : `pacman -S net-tools`
