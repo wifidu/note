@@ -5,3 +5,8 @@
 [🔗Linux](https://github.com/wifidu/note/blob/master/Linux.md)
 
 [🔗Computer](https://github.com/wifidu/note/blob/master/Computer.md)
+
+[🔗PHP](./PHP.md)
+
+[🔗DataStructure](./DataStructure.md)
+
