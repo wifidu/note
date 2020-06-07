@@ -1,3 +1,11 @@
+---
+tags: [Database]
+date: 2020-06-07 09:30:13
+categories:
+- Database
+updated:  2020-06-07 09:30:13
+---
+
 # Database notes
 
 <!-- vim-markdown-toc Redcarpet -->

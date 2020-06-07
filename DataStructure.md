@@ -1,3 +1,11 @@
+---
+tags: [DataStructure]
+date: 2020-06-07 09:30:32
+categories:
+- DataStructure
+updated:  2020-06-07 09:30:32
+---
+
 # 数据结构知识笔记
 
 <!-- vim-markdown-toc Redcarpet -->

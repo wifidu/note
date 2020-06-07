@@ -1,3 +1,11 @@
+---
+tags: [Linux]
+date: 2020-06-07 09:31:15
+categories:
+- Linux
+updated:  2020-06-07 09:31:15
+---
+
 # Linux知识笔记
 
 <!-- vim-markdown-toc Redcarpet -->
