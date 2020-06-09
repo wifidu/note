@@ -6,7 +6,7 @@
 
 [🔗Computer](https://github.com/wifidu/note/blob/master/Computer.md)
 
-[🔗PHP](./PHP.md)
+[🔗](./PHP.md)PHP
 
 [🔗](./Database.md)Database
 
